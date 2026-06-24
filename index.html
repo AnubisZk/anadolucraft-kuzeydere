@@ -351,9 +351,13 @@
   #credits-modal { position: absolute; inset: 0; z-index: 130; display: none; align-items: center; justify-content: center;
     background: #0009; padding: 18px; }
   #credits-modal.visible { display: flex; }
-  #credits-dialog { width: min(520px, 92vw); padding: 18px; }
+  #credits-dialog { width: min(520px, 92vw); max-height: calc(100vh - 36px); overflow: auto; padding: 18px; }
   #credits-dialog .credits-body { color: #c2cad5; font-size: 13px; line-height: 1.55; user-select: text; }
   #credits-dialog .credits-body h2 { color: var(--gold); font-family: var(--title-font); font-size: 24px; margin-bottom: 8px; }
+  #credits-dialog .credits-logo {
+    display: block; width: min(170px, 48vw); height: auto; margin: 2px auto 14px;
+    filter: drop-shadow(0 10px 20px #000b) drop-shadow(0 0 12px #6db4ff33);
+  }
   #credits-dialog .credits-body p { margin: 8px 0; }
   #credits-dialog .credits-body ul { margin: 8px 0 0 18px; }
   #credits-dialog .credits-body a { color: var(--gold); }
@@ -628,6 +632,7 @@
       <div class="panel-title"><span id="credits-title">Katkılar</span><span class="x-btn" id="credits-close">✕</span></div>
       <div class="credits-body">
         <h2>AnatolianCraft: Kuzeydere</h2>
+        <img class="credits-logo" src="/zsk-solutions-logo.png" alt="ZSK Solutions" draggable="false" />
         <p><b>Harita/Bölge:</b> Kuzeydere</p>
         <p>Bu oyun, açık kaynak web oyun teknolojileri kullanılarak geliştirilmiştir. Orijinal proje katkıları, lisans bildirimleri ve kullanılan teknolojiler için LICENSE ve CREDITS.md dosyalarına bakınız.</p>
         <p>Kaynak kod ve lisans bilgileri:<br><a href="https://github.com/AnubisZk/anadolucraft-kuzeydere" target="_blank" rel="noopener noreferrer">https://github.com/AnubisZk/anadolucraft-kuzeydere</a></p>
