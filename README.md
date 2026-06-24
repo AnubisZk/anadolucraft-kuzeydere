@@ -21,8 +21,8 @@ modelleri üretildiğinde bunlar `public/` ve `src/render/characters/manifest.ts
 Önerilen ilk asset işleri:
 
 - Kutup kurdu modeli: mevcut wolf/yeti yaratık hattına yeni GLB olarak ekle.
-- Kuzeydere müziği: `public/audio/` altına MP3 koyup `src/game/music.ts`
-  içinde rota/playlist olarak tanıt.
+- Kuzeydere müziği: ana keşif teması `public/audio/gates_of_the_frozen_peak.mp3`,
+  savaş teması `public/audio/beneath_the_bitter_peak.mp3` olarak bağlandı.
 - Kale/köprü/kar prop setleri: optimize edilmiş GLB dosyalarını `public/models/`
   altına koyup prop manifestine bağla.
 - Logo finali: mevcut `public/anatoliancraft-logo.png` korunuyor; Kuzeydere

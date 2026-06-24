@@ -80,7 +80,7 @@ export class Hud {
     $('#mm-map').addEventListener('click', () => this.toggleMap());
     $('#mm-bag').addEventListener('click', () => this.toggleBags());
     const musicBtn = $('#mm-music');
-    const styleMusicBtn = () => { musicBtn.style.color = music.enabled ? '#ffd100' : '#666'; };
+    const styleMusicBtn = () => { musicBtn.style.color = music.enabled ? '#d9e1ea' : '#666'; };
     styleMusicBtn();
     musicBtn.addEventListener('click', () => {
       music.setEnabled(!music.enabled);
@@ -89,8 +89,8 @@ export class Hud {
     const startZone = zoneAt(sim.player.pos.z);
     this.lastZoneId = startZone.id;
     this.showBanner(startZone.name);
-    this.log(`${startZone.name} bölgesine hoş geldin!`, '#ffd100');
-    this.log(startZone.welcome, '#ffd100');
+    this.log(`${startZone.name} bölgesine hoş geldin!`, '#d9e1ea');
+    this.log(startZone.welcome, '#d9e1ea');
   }
 
   // -------------------------------------------------------------------------
@@ -397,8 +397,8 @@ export class Hud {
       if (pastDeadBand) {
         if (this.lastZoneId !== '') {
           this.showBanner(currentZone.name);
-          this.log(`${currentZone.name} bölgesine giriyorsun.`, '#ffd100');
-          this.log(currentZone.welcome, '#ffd100');
+          this.log(`${currentZone.name} bölgesine giriyorsun.`, '#d9e1ea');
+          this.log(currentZone.welcome, '#d9e1ea');
         }
         this.lastZoneId = currentZone.id;
       }
@@ -540,7 +540,7 @@ export class Hud {
       if (e.kind === 'npc') {
         const hasAvail = e.questIds.some((q) => this.sim.questState(q) === 'available');
         const hasReady = e.questIds.some((q) => this.sim.questState(q) === 'ready');
-        ctx.fillStyle = '#ffd100';
+        ctx.fillStyle = '#d9e1ea';
         ctx.font = 'bold 11px Georgia';
         ctx.fillText(hasReady ? '?' : hasAvail ? '!' : '•', mx - 2, my + 3);
       } else if (e.kind === 'object' && (e.templateId === 'dungeon_door' || e.templateId === 'dungeon_exit')) {
@@ -555,7 +555,7 @@ export class Hud {
         ctx.fillStyle = e.aggroTargetId === p.id ? '#ff8800' : '#e74c3c';
         ctx.fillRect(mx - 1.5, my - 1.5, 3, 3);
       } else if (e.kind === 'mob' && e.lootable) {
-        ctx.fillStyle = '#ffd100';
+        ctx.fillStyle = '#d9e1ea';
         ctx.fillRect(mx - 1.5, my - 1.5, 3, 3);
       }
     }
@@ -663,7 +663,7 @@ export class Hud {
       const hasAvail = e.questIds.some((q) => this.sim.questState(q) === 'available');
       const hasReady = e.questIds.some((q) => this.sim.questState(q) === 'ready');
       if (hasAvail || hasReady) {
-        ctx.fillStyle = '#ffd100';
+        ctx.fillStyle = '#d9e1ea';
         ctx.font = 'bold 15px Georgia';
         ctx.strokeText(hasReady ? '?' : '!', mx, my);
         ctx.fillText(hasReady ? '?' : '!', mx, my);
@@ -745,7 +745,7 @@ export class Hud {
         }
         case 'levelup': {
           this.showBanner(`Seviye ${ev.level}!`);
-          this.log(`Seviye ${ev.level} oldun!`, '#ffd100');
+          this.log(`Seviye ${ev.level} oldun!`, '#d9e1ea');
           audio.levelUp();
           break;
         }

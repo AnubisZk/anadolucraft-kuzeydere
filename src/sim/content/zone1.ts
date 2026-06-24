@@ -1,6 +1,6 @@
-// Zone 1 — Kuzeydere (levels 1-7). The starter zone: town of Kuzeydere,
-// wolves and boars, the bandit camp, and Hoca Ali's Gravecaller chain
-// leading to the Hollow Crypt.
+// Zone 1 — Kuzeydere (levels 1-7). The starter zone: a frozen mountain town,
+// polar wolves, snow boars, raider camps, and Hoca Ali's Gravecaller chain
+// leading beneath the old peak chapel.
 
 import type { CampDef, GroundObjectDef, MobTemplate, NpcDef, QuestDef, ZoneDef, ZonePropsDef } from '../types';
 
@@ -16,21 +16,21 @@ export const ZONE1_ZONE: ZoneDef = {
   zMin: -180,
   zMax: 180,
   levelRange: [1, 7],
-  biome: 'marsh',
+  biome: 'peaks',
   hub: { x: 0, z: 0, radius: TOWN_RADIUS, name: 'Kuzeydere' },
   graveyard: GRAVEYARD_POS,
   lakes: [LAKE],
   pois: [
     { x: 0, z: -3, label: 'Kuzeydere' },
-    { x: -2, z: 70, label: 'Kurt Geçidi' },
-    { x: 65, z: 0, label: 'Domuz Çayırı' },
-    { x: -88, z: 82, label: 'Ayna Gölü' },
-    { x: -60, z: 4, label: 'Ağorman' },
-    { x: -84, z: -64, label: 'Bakır Ocağı' },
-    { x: 76, z: -76, label: 'Haydut Kampı' },
-    { x: 80, z: 80, label: 'Yıkık Şapel' },
+    { x: -2, z: 70, label: 'Kutup Kurdu Geçidi' },
+    { x: 65, z: 0, label: 'Kar Domuzu Yamacı' },
+    { x: -88, z: 82, label: 'Donuk Ayna Gölü' },
+    { x: -60, z: 4, label: 'Buzçam Ormanı' },
+    { x: -84, z: -64, label: 'Kuzey Bakır Ocağı' },
+    { x: 76, z: -76, label: 'Buzkıran Kampı' },
+    { x: 80, z: 80, label: 'Yıkık Zirve Şapeli' },
   ],
-  welcome: 'Kasabada Şerif Zafer\'i bul — sana iş verecek.',
+  welcome: 'Karlı kapıda Şerif Zafer\'i bul — Kuzeydere senden yardım bekliyor.',
 };
 
 // ---------------------------------------------------------------------------
@@ -39,17 +39,17 @@ export const ZONE1_ZONE: ZoneDef = {
 
 export const ZONE1_MOBS: Record<string, MobTemplate> = {
   forest_wolf: {
-    id: 'forest_wolf', name: 'Orman Kurdu', minLevel: 1, maxLevel: 2, family: 'beast',
+    id: 'forest_wolf', name: 'Kutup Kurdu', minLevel: 1, maxLevel: 2, family: 'beast',
     hpBase: 28, hpPerLevel: 14, dmgBase: 3, dmgPerLevel: 1.6, attackSpeed: 2.0,
     armorPerLevel: 10, moveSpeed: 8, aggroRadius: 10,
     loot: [
       { copper: 8, chance: 1 },
       { itemId: 'wolf_fang', chance: 0.45 },
     ],
-    scale: 0.9, color: 0x7f8c8d,
+    scale: 0.95, color: 0xc8d4df,
   },
   old_greyjaw: {
-    id: 'old_greyjaw', name: 'Koca Bozçene', minLevel: 4, maxLevel: 4, family: 'beast', rare: true,
+    id: 'old_greyjaw', name: 'Akdiş Bozçene', minLevel: 4, maxLevel: 4, family: 'beast', rare: true,
     hpBase: 110, hpPerLevel: 20, dmgBase: 5, dmgPerLevel: 2.0, attackSpeed: 1.8,
     armorPerLevel: 16, moveSpeed: 8.5, aggroRadius: 12,
     loot: [
@@ -57,10 +57,10 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
       { itemId: 'greyjaw_fang', chance: 1, questId: 'q_greyjaw' },
       { itemId: 'wolf_fang', chance: 1 },
     ],
-    scale: 1.25, color: 0x566061,
+    scale: 1.3, color: 0xdde6ee,
   },
   wild_boar: {
-    id: 'wild_boar', name: 'Yaban Domuzu', minLevel: 2, maxLevel: 3, family: 'beast',
+    id: 'wild_boar', name: 'Kar Domuzu', minLevel: 2, maxLevel: 3, family: 'beast',
     hpBase: 34, hpPerLevel: 16, dmgBase: 4, dmgPerLevel: 1.8, attackSpeed: 2.2,
     armorPerLevel: 14, moveSpeed: 7.5, aggroRadius: 9,
     loot: [
@@ -68,10 +68,10 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
       { itemId: 'boar_hide', chance: 0.6, questId: 'q_boars' },
       { itemId: 'tough_jerky', chance: 0.3 },
     ],
-    scale: 0.85, color: 0x935116,
+    scale: 0.9, color: 0xb9afa6,
   },
   webwood_spider: {
-    id: 'webwood_spider', name: 'Ağorman Pusucusu', minLevel: 2, maxLevel: 4, family: 'spider',
+    id: 'webwood_spider', name: 'Buzçam Pusucusu', minLevel: 2, maxLevel: 4, family: 'spider',
     hpBase: 30, hpPerLevel: 15, dmgBase: 4, dmgPerLevel: 1.7, attackSpeed: 1.8,
     armorPerLevel: 8, moveSpeed: 8, aggroRadius: 10,
     loot: [
@@ -79,10 +79,10 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
       { itemId: 'webwood_silk', chance: 0.55, questId: 'q_spiders' },
       { itemId: 'spider_leg', chance: 0.4 },
     ],
-    scale: 0.9, color: 0x4a235a,
+    scale: 0.9, color: 0x6f7f9a,
   },
   mudfin_murloc: {
-    id: 'mudfin_murloc', name: 'Çamuryüzgeç Sinsisi', minLevel: 3, maxLevel: 5, family: 'murloc',
+    id: 'mudfin_murloc', name: 'Buzgöl Sinsisi', minLevel: 3, maxLevel: 5, family: 'murloc',
     hpBase: 36, hpPerLevel: 17, dmgBase: 5, dmgPerLevel: 1.9, attackSpeed: 1.9,
     armorPerLevel: 12, moveSpeed: 8, aggroRadius: 13, // murlocs aggro from far and bring friends
     loot: [
@@ -90,10 +90,10 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
       { itemId: 'mudfin_scale', chance: 0.5 },
       { itemId: 'linen_scrap', chance: 0.2 },
     ],
-    scale: 0.8, color: 0x52be80,
+    scale: 0.8, color: 0x76b7c8,
   },
   tunnel_rat: {
-    id: 'tunnel_rat', name: 'Tünel Sıçanı Kazıcı', minLevel: 4, maxLevel: 6, family: 'kobold',
+    id: 'tunnel_rat', name: 'Buz Kazıcı', minLevel: 4, maxLevel: 6, family: 'kobold',
     hpBase: 42, hpPerLevel: 18, dmgBase: 6, dmgPerLevel: 2.0, attackSpeed: 2.1,
     armorPerLevel: 16, moveSpeed: 7, aggroRadius: 10,
     loot: [
@@ -105,7 +105,7 @@ export const ZONE1_MOBS: Record<string, MobTemplate> = {
     scale: 0.85, color: 0x9c640c,
   },
   vale_bandit: {
-    id: 'vale_bandit', name: 'Vadi Haydudu', minLevel: 3, maxLevel: 5, family: 'humanoid',
+    id: 'vale_bandit', name: 'Buzkıran Yağmacısı', minLevel: 3, maxLevel: 5, family: 'humanoid',
     hpBase: 40, hpPerLevel: 18, dmgBase: 5, dmgPerLevel: 2.0, attackSpeed: 2.0,
     armorPerLevel: 20, moveSpeed: 7, aggroRadius: 11,
     loot: [
@@ -149,7 +149,7 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     id: 'marshal_redbrook', name: 'Şerif Zafer', title: 'Kasaba Şerifi',
     pos: { x: 4, z: 6 }, facing: Math.PI, color: 0xb7950b,
     questIds: ['q_wolves', 'q_greyjaw', 'q_bandits', 'q_ringleader'],
-    greeting: 'Kılıcını yanından ayırma $C. Vadi artık eskisi gibi değil.',
+    greeting: 'Kılıcını yanından ayırma $C. Kuzey geçidi artık eskisi gibi değil.',
   },
   trader_wilkes: {
     id: 'trader_wilkes', name: 'Tüccar Osman', title: 'Erzakçı',
@@ -162,16 +162,16 @@ export const ZONE1_NPCS: Record<string, NpcDef> = {
     id: 'apothecary_lin', name: 'Eczacı Ayşegül', title: 'Otacı',
     pos: { x: 11, z: -3 }, facing: -Math.PI / 2, color: 0x7d3c98,
     questIds: ['q_spiders'],
-    greeting: 'Doğu ormanlarında adımına dikkat et dostum.',
+    greeting: 'Karlı çamlıklarda adımına dikkat et dostum.',
   },
   female_shaman: {
-    id: 'female_shaman', name: 'Şaman Aylin', title: 'Vadi Şamanı',
+    id: 'female_shaman', name: 'Şaman Aylin', title: 'Kuzey Şamanı',
     pos: { x: 10, z: 7.5 }, facing: -2.35, color: 0xd3b486,
     questIds: [],
     greeting: 'Toprak da su da konuşur $C. Dinlemeyi bilen yolu bulur.',
   },
   brother_aldric: {
-    id: 'brother_aldric', name: 'Hoca Ali', title: 'Vadi Hocası',
+    id: 'brother_aldric', name: 'Hoca Ali', title: 'Kuzeydere Hocası',
     pos: { x: -14, z: -10 }, facing: 0.8, color: 0xf7f9f9,
     questIds: [
       'q_bones', 'q_whispers', 'q_names_of_the_dead', 'q_silence_the_call',
@@ -217,17 +217,17 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
   q_wolves: {
     id: 'q_wolves', name: 'Kapıdaki Kurtlar',
     giverNpcId: 'marshal_redbrook', turnInNpcId: 'marshal_redbrook',
-    text: 'Orman kurtları iyice gözünü karartmış, kuzey yolundaki yolculara saldırıyorlar. Sayılarını azalt $N. 8 Orman Kurdu öldür ki Batıdere rahat bir nefes alsın.',
+    text: 'Kutup kurtları iyice gözünü karartmış, kuzey yolundaki yolculara saldırıyorlar. Sayılarını azalt $N. 8 Kutup Kurdu öldür ki Kuzeydere rahat bir nefes alsın.',
     completionText: 'İyi iş. Yol şimdiden daha güvenli.',
-    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 8, label: 'Orman Kurdu öldürüldü' }],
+    objectives: [{ type: 'kill', targetMobId: 'forest_wolf', count: 8, label: 'Kutup Kurdu öldürüldü' }],
     xpReward: 250, copperReward: 75, itemRewards: {},
   },
   q_greyjaw: {
     id: 'q_greyjaw', name: 'Yaşlı Kurt',
     giverNpcId: 'marshal_redbrook', turnInNpcId: 'marshal_redbrook',
-    text: 'Hiçbir tuzağın tutamadığı tek bir kurt var: Koca Bozçene. Üç av köpeğini ve bir seyis çocuğunun kolunu aldı. Kurt geçitlerinin kuzeyindeki derin ormanda dolanıyor. Bana dişini getir.',
+    text: 'Hiçbir tuzağın tutamadığı tek bir kurt var: Akdiş Bozçene. Üç av köpeğini ve bir seyis çocuğunun kolunu aldı. Kurt geçitlerinin kuzeyindeki derin ormanda dolanıyor. Bana dişini getir.',
     completionText: 'Demek koca şeytan sonunda öldü. Seyis çocuğu artık rahat uyuyacak — ben de öyle.',
-    objectives: [{ type: 'collect', itemId: 'greyjaw_fang', count: 1, label: 'Koca Bozçene\'nin Dişi' }],
+    objectives: [{ type: 'collect', itemId: 'greyjaw_fang', count: 1, label: 'Akdiş Bozçene\'nin Dişi' }],
     xpReward: 450, copperReward: 150,
     itemRewards: { warrior: 'greyjaw_pelt_cloak', mage: 'greyjaw_pelt_cloak', rogue: 'greyjaw_pelt_cloak' },
     requiresQuest: 'q_wolves',
@@ -235,19 +235,19 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
   q_boars: {
     id: 'q_boars', name: 'Kıllı Domuz Postları',
     giverNpcId: 'trader_wilkes', turnInNpcId: 'trader_wilkes',
-    text: 'En iyi yol çantaları domuz derisinden yapılır ve kasabanın batısındaki çayırlar bu hayvanlarla kaynıyor. Bana 5 Kıllı Domuz Postu getir, zahmetine değsin.',
+    text: 'En iyi yol çantaları sağlam domuz derisinden yapılır ve kuzey yamaçları bu hayvanlarla kaynıyor. Bana 5 Kıllı Domuz Postu getir, zahmetine değsin.',
     completionText: 'Ah, ne güzel kıllı postlar! Bunlar iyi para eder.',
     objectives: [{ type: 'collect', itemId: 'boar_hide', count: 5, label: 'Kıllı Domuz Postu' }],
     xpReward: 350, copperReward: 120, itemRewards: {},
   },
   q_spiders: {
-    id: 'q_spiders', name: 'Ağorman Belası',
+    id: 'q_spiders', name: 'Buzçam Belası',
     giverNpcId: 'apothecary_lin', turnInNpcId: 'apothecary_lin',
-    text: 'Doğu ormanlarındaki pusucular, lapalarım için gereken bir ipek örüyor — üstelik sayıları da haddinden fazla arttı. 6 Ağorman Pusucusu öldür ve karınlarından 4 ipek bezesi kes.',
+    text: 'Karlı çamlıklardaki pusucular, lapalarım için gereken bir ipek örüyor — üstelik sayıları da haddinden fazla arttı. 6 Buzçam Pusucusu öldür ve karınlarından 4 ipek bezesi kes.',
     completionText: 'Iyy, hâlâ seğiriyor. Mükemmel. Al, bunu hak ettin.',
     objectives: [
-      { type: 'kill', targetMobId: 'webwood_spider', count: 6, label: 'Ağorman Pusucusu öldürüldü' },
-      { type: 'collect', itemId: 'webwood_silk', count: 4, label: 'Ağorman İpek Bezesi' },
+      { type: 'kill', targetMobId: 'webwood_spider', count: 6, label: 'Buzçam Pusucusu öldürüldü' },
+      { type: 'collect', itemId: 'webwood_silk', count: 4, label: 'Buzçam İpek Bezesi' },
     ],
     xpReward: 420, copperReward: 140, itemRewards: {},
     minLevel: 2,
@@ -255,18 +255,18 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
   q_murlocs: {
     id: 'q_murlocs', name: 'Gölde Bela',
     giverNpcId: 'fisherman_brandt', turnInNpcId: 'fisherman_brandt',
-    text: 'Yirmi yıldır Ayna Gölü\'nde balık tutarım; o lıkırdayan balık adamlar sığlıklardan çıkana dek tek bir ağ kaybetmemiştim. Çamuryüzgeçleri geri püskürt — 8 tanesini öldür. Ve dikkatli ol: bir murlok gördüysen yanında beş tane daha vardır.',
+    text: 'Yirmi yıldır Donuk Ayna Gölü\'nde balık tutarım; o lıkırdayan balık adamlar buz kırıklarından çıkana dek tek bir ağ kaybetmemiştim. Buzgöl sinsilerini geri püskürt — 8 tanesini öldür. Ve dikkatli ol: bir murlok gördüysen yanında beş tane daha vardır.',
     completionText: 'Hah! Bu onlara kendi çamur deliklerine bakmayı öğretir.',
-    objectives: [{ type: 'kill', targetMobId: 'mudfin_murloc', count: 8, label: 'Çamuryüzgeç Sinsisi öldürüldü' }],
+    objectives: [{ type: 'kill', targetMobId: 'mudfin_murloc', count: 8, label: 'Buzgöl Sinsisi öldürüldü' }],
     xpReward: 520, copperReward: 180, itemRewards: {},
     minLevel: 3,
   },
   q_mine: {
     id: 'q_mine', name: 'Madendeki Sıçanlar',
     giverNpcId: 'foreman_odell', turnInNpcId: 'foreman_odell',
-    text: 'Güzel bir bakır damarı bulmuştuk ki o kobold haşeratı yamaçtan fışkırıverdi. Ocak temizlenene kadar ekibim oraya adım atmaz. 10 Tünel Sıçanı Kazıcı\'nın işini bitir.',
+    text: 'Güzel bir bakır damarı bulmuştuk ki o kobold haşeratı yamaçtan fışkırıverdi. Ocak temizlenene kadar ekibim oraya adım atmaz. 10 Buz Kazıcı\'nın işini bitir.',
     completionText: 'Ha! İşbaşına çocuklar! Teşekkürümü de paramı da hak ettin.',
-    objectives: [{ type: 'kill', targetMobId: 'tunnel_rat', count: 10, label: 'Tünel Sıçanı Kazıcı öldürüldü' }],
+    objectives: [{ type: 'kill', targetMobId: 'tunnel_rat', count: 10, label: 'Buz Kazıcı öldürüldü' }],
     xpReward: 620, copperReward: 220, itemRewards: {},
     minLevel: 4,
   },
@@ -282,7 +282,7 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
   q_supplies: {
     id: 'q_supplies', name: 'Çalınan Erzak',
     giverNpcId: 'trader_wilkes', turnInNpcId: 'trader_wilkes',
-    text: 'O haydutlar son arabamı vurup dört sandık malımı götürdüler — alet, tuz, has Batıdere keteni. Sandıklar güneydoğu tepelerindeki kamplarında duruyor. Onları benim için geri çalar mısın?',
+    text: 'O Buzkıranlar son arabamı vurup dört sandık malımı götürdüler — alet, tuz, has Kuzeydere keteni. Sandıklar güneydoğu tepelerindeki kamplarında duruyor. Onları benim için geri çalar mısın?',
     completionText: 'Sandıklarım! Üstelik neredeyse çiziksiz. Sen bir harikasın.',
     objectives: [{ type: 'collect', itemId: 'supply_crate', count: 4, label: 'Çalınan Erzak Sandığı' }],
     xpReward: 550, copperReward: 250, itemRewards: {},
@@ -301,7 +301,7 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     id: 'q_names_of_the_dead', name: 'Ölülerin Adları',
     giverNpcId: 'brother_aldric', turnInNpcId: 'brother_aldric',
     text: 'Mezarçağıranlar ölülerimizi dirilttiyse, kimlerin mezarını soyduklarını bilmeliyim. Şapel zangoçu bir defin defteri tutardı; rüzgâr sayfalarını şapel avlusuna savurmuş. Bana 3 tanesini topla $N — ölüler adlarıyla anılmayı hak eder.',
-    completionText: 'Zavallı ruhlar... ve şuraya bak. Zangoç Marrow — şapelin kendi bekçisi — ilk bozulan mezar onunki. Morthen işe Batıdere\'nin ölülerini gömen adamın ta kendisiyle başlamış.',
+    completionText: 'Zavallı ruhlar... ve şuraya bak. Zangoç Marrow — şapelin kendi bekçisi — ilk bozulan mezar onunki. Morthen işe Kuzeydere\'nin ölülerini gömen adamın ta kendisiyle başlamış.',
     objectives: [{ type: 'collect', itemId: 'weathered_ledger_page', count: 3, label: 'Yıpranmış Defter Sayfası' }],
     xpReward: 600, copperReward: 250, itemRewards: {},
     requiresQuest: 'q_whispers',
@@ -330,8 +330,8 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
   q_hollow: {
     id: 'q_hollow', name: 'Oyuk\'a İniş',
     giverNpcId: 'brother_aldric', turnInNpcId: 'brother_aldric',
-    text: 'Mezarçağıran Morthen, Oyuk Mahzen\'in dibinde, dirilttiği seçkin ölülerle çevrili hâlde bekliyor. Tek bir kahramanın harcı değil — yanına dört yoldaş al, daha azı olmaz. Onun işini bitir ki Vadi\'nin ölüleri nihayet uyusun.',
-    completionText: 'Fısıltılar durdu. Bütün Vadi\'nin yapamadığını yaptın $N — ölüler uyuyor ve Batıdere sana her şeyini borçlu.',
+    text: 'Mezarçağıran Morthen, Oyuk Mahzen\'in dibinde, dirilttiği seçkin ölülerle çevrili hâlde bekliyor. Tek bir kahramanın harcı değil — yanına dört yoldaş al, daha azı olmaz. Onun işini bitir ki Kuzeydere\'nin ölüleri nihayet uyusun.',
+    completionText: 'Fısıltılar durdu. Bütün Kuzeydere\'nin yapamadığını yaptın $N — ölüler uyuyor ve Kuzeydere sana her şeyini borçlu.',
     objectives: [{ type: 'kill', targetMobId: 'morthen', count: 1, label: 'Mezarçağıran Morthen öldürüldü' }],
     xpReward: 1500, copperReward: 10000,
     itemRewards: { warrior: 'gravecaller_blade', rogue: 'widowfang_dirk', mage: 'gravecaller_staff' },
@@ -359,11 +359,11 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
     requiresQuest: 'q_hollow',
   },
   q_bandits: {
-    id: 'q_bandits', name: 'Vadi Haydutları',
+    id: 'q_bandits', name: 'Kuzey Buzkıranları',
     giverNpcId: 'marshal_redbrook', turnInNpcId: 'marshal_redbrook',
-    text: 'Bir sürü gözü dönmüş haydut güneybatı tepelerine kamp kurmuş. Bu hafta üç araba soydular. Onları def et — 10 Vadi Haydudu öldür.',
+    text: 'Bir sürü gözü dönmüş Buzkıran güneybatı tepelerine kamp kurmuş. Bu hafta üç araba soydular. Onları def et — 10 Buzkıran Yağmacısı öldür.',
     completionText: 'Karanlıkta on bıçak eksildi. Al şunu — hak ettin.',
-    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 10, label: 'Vadi Haydudu öldürüldü' }],
+    objectives: [{ type: 'kill', targetMobId: 'vale_bandit', count: 10, label: 'Buzkıran Yağmacısı öldürüldü' }],
     xpReward: 550, copperReward: 200,
     itemRewards: { warrior: 'redbrook_blade', mage: 'apprentice_staff', rogue: 'keen_dirk' },
     requiresQuest: 'q_wolves',
@@ -371,8 +371,8 @@ export const ZONE1_QUESTS: Record<string, QuestDef> = {
   q_ringleader: {
     id: 'q_ringleader', name: 'Elebaşı',
     giverNpcId: 'marshal_redbrook', turnInNpcId: 'marshal_redbrook',
-    text: 'Haydutlar tek bir adama hesap verir: Acımasız Gorrak. Başı kes, gövde dağılır. Kampının göbeğinde sinsice dolanıyor. İşini bitir $N.',
-    completionText: 'Gorrak öldü mü? Öyleyse Vadi onun gölgesinden kurtuldu. Batıdere\'ye büyük bir hizmette bulundun.',
+    text: 'Buzkıranlar tek bir adama hesap verir: Acımasız Gorrak. Başı kes, gövde dağılır. Kampının göbeğinde sinsice dolanıyor. İşini bitir $N.',
+    completionText: 'Gorrak öldü mü? Öyleyse Kuzeydere onun gölgesinden kurtuldu. Kuzeydere\'ye büyük bir hizmette bulundun.',
     objectives: [{ type: 'kill', targetMobId: 'gorrak', count: 1, label: 'Acımasız Gorrak öldürüldü' }],
     xpReward: 800, copperReward: 500,
     itemRewards: { warrior: 'militia_vest', mage: 'woven_robe', rogue: 'shadow_jerkin' },

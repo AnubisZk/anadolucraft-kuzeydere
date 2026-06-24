@@ -290,7 +290,8 @@ function composeCombat(): Theme {
 const FADE_SECONDS = 2.2;
 const LOOKAHEAD = 0.6;
 const STORAGE_KEY = 'ev_music_on';
-const COMBAT_MUSIC_URL = '/audio/ambush_in_the_reeds.mp3';
+const AMBIENT_MUSIC_URL = '/audio/gates_of_the_frozen_peak.mp3';
+const COMBAT_MUSIC_URL = '/audio/beneath_the_bitter_peak.mp3';
 
 // The combat ostinato is written from D3; transpose it onto each zone's tonal
 // center so it never fights the theme underneath:
@@ -314,8 +315,11 @@ export class MusicDirector {
   private reverbSend: GainNode | null = null;
   private layers: Record<string, Layer> = {};
   private timer: number | undefined;
+  private ambientTrack: HTMLAudioElement | null = null;
   private combatTrack: HTMLAudioElement | null = null;
+  private ambientFade: number | undefined;
   private combatFade: number | undefined;
+  private ambientTrackTarget = 0;
   private combatTrackTarget = 0;
   // null until the first update() so the initial state always applies — a
   // 'town' sentinel matched the real starting zone and left spawn silent
@@ -336,7 +340,7 @@ export class MusicDirector {
     }
     const ctx = this.ctx;
     this.master = ctx.createGain();
-    this.master.gain.value = this._enabled ? 0.15 : 0;
+    this.master.gain.value = this._enabled ? 0.08 : 0;
     this.master.connect(ctx.destination);
 
     // generated hall impulse response
@@ -371,6 +375,10 @@ export class MusicDirector {
       gain.connect(this.reverbSend);
       this.layers[name] = { theme, gain, target: 0, anchor: 0, nextIdx: -1, loopCount: 0, transpose: 0 };
     }
+    this.ambientTrack = new Audio(AMBIENT_MUSIC_URL);
+    this.ambientTrack.loop = true;
+    this.ambientTrack.preload = 'auto';
+    this.ambientTrack.volume = 0;
     this.combatTrack = new Audio(COMBAT_MUSIC_URL);
     this.combatTrack.loop = true;
     this.combatTrack.preload = 'auto';
@@ -384,10 +392,15 @@ export class MusicDirector {
       localStorage.setItem(STORAGE_KEY, on ? '1' : '0');
     } catch { /* private mode */ }
     if (this.ctx && this.master) {
-      this.master.gain.setTargetAtTime(on ? 0.15 : 0, this.ctx.currentTime, 0.3);
+      this.master.gain.setTargetAtTime(on ? 0.08 : 0, this.ctx.currentTime, 0.3);
     }
-    if (!on) this.fadeCombatTrack(0);
-    else if (this.combat) this.fadeCombatTrack(0.72);
+    if (!on) {
+      this.fadeAmbientTrack(0);
+      this.fadeCombatTrack(0);
+    } else {
+      this.fadeAmbientTrack(this.combat ? 0.22 : 0.58);
+      this.fadeCombatTrack(this.combat ? 0.72 : 0);
+    }
   }
 
   // called every frame by the HUD; cheap unless the state changed
@@ -399,8 +412,9 @@ export class MusicDirector {
     const now = this.ctx.currentTime;
     for (const [name, layer] of Object.entries(this.layers)) {
       if (name === 'combat') continue;
-      // the zone theme keeps playing (quieter) under the combat layer
-      const target = name === zone ? (inCombat ? 0.45 : 1) : 0;
+      // Kuzeydere uses authored MP3 themes; keep the generated score silent so
+      // it never fights the main tracks.
+      const target = 0;
       if (layer.target !== target) {
         layer.target = target;
         layer.gain.gain.setTargetAtTime(target, now, FADE_SECONDS / 3);
@@ -416,7 +430,28 @@ export class MusicDirector {
       combatLayer.target = combatTarget;
       combatLayer.gain.gain.setTargetAtTime(combatTarget, now, inCombat ? 0.35 : FADE_SECONDS / 3);
     }
+    this.fadeAmbientTrack(this._enabled ? (inCombat ? 0.22 : 0.58) : 0);
     this.fadeCombatTrack(inCombat && this._enabled ? 0.72 : 0);
+  }
+
+  private fadeAmbientTrack(target: number): void {
+    const audio = this.ambientTrack;
+    if (!audio || this.ambientTrackTarget === target) return;
+    this.ambientTrackTarget = target;
+    if (target > 0 && audio.paused) {
+      void audio.play().catch(() => undefined);
+    }
+    if (this.ambientFade !== undefined) window.clearInterval(this.ambientFade);
+    this.ambientFade = window.setInterval(() => {
+      const next = audio.volume + (target - audio.volume) * 0.12;
+      audio.volume = Math.max(0, Math.min(1, next));
+      if (Math.abs(audio.volume - target) < 0.012) {
+        audio.volume = target;
+        if (target === 0) audio.pause();
+        if (this.ambientFade !== undefined) window.clearInterval(this.ambientFade);
+        this.ambientFade = undefined;
+      }
+    }, 50);
   }
 
   private fadeCombatTrack(target: number): void {
