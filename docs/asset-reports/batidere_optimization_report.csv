@@ -1,0 +1,13 @@
+source,output,blend,before_mb,after_mb,before_vertices,after_vertices,before_triangles,after_triangles,decimate_ratio,resized_textures,rigged
+Meshy_AI_A_full_body_female_wa_0619131322_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/rigged/female_npc_rigged.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/blend/female_npc_rigged.blend,29.58,2.77,10969,9267,13083,9812,0.75,2,True
+Meshy_AI_Create_a_game_ready_s_0619130812_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/prop_0812.glb,,30.22,2.42,5243,5243,5243,5243,1.0,2,False
+Meshy_AI_Create_a_game_ready_s_0619131236_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/prop_1236.glb,,31.64,2.92,22091,17236,24120,16884,0.7,2,False
+Meshy_AI_Create_a_game_ready_s_0619131301_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/prop_1301.glb,,13.0,11.61,47371,40287,24799,17359,0.7,0,False
+Meshy_AI_Create_a_game_ready_s_0619131541_texture.glb,duplicate_of:Meshy_AI_Create_a_game_ready_s_0619131301_texture.glb,,13.0,0,,,,,,,False
+Meshy_AI_Create_a_game_ready_s_0619134112_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/prop_4112.glb,,31.41,2.94,18134,14841,19820,13873,0.7,2,False
+Meshy_AI_Create_a_game_ready_s_0619134305_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/prop_4305.glb,,26.58,2.64,15998,12909,17604,12321,0.7,2,False
+Meshy_AI_Create_a_game_ready_s_0619134312_texture.glb,duplicate_of:Meshy_AI_Create_a_game_ready_s_0619134305_texture.glb,,26.58,0,,,,,,,False
+Meshy_AI_Garden_Glow_in_White_0619125956_texture.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/garden_glow_white.glb,,13.27,7.3,123387,33811,213702,38465,0.18,0,False
+batidere_dock.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/dock.glb,,23.66,2.19,5243,5243,5243,5243,1.0,2,False
+stone_bridge.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/stone_bridge.glb,,31.26,2.68,7817,7817,8742,8742,1.0,2,False
+stone_house.glb,/Users/zafersavaskivilcim/Documents/Codex/2026-06-19/batidere-assets/outputs/optimized/stone_house.glb,,31.74,2.87,15084,11682,16519,11562,0.7,2,False

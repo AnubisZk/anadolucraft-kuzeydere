@@ -1,0 +1,13 @@
+[build]
+  command = "git lfs pull && pnpm run build"
+  publish = "dist"
+
+[build.environment]
+  GIT_LFS_ENABLED = "true"
+  NODE_VERSION = "22"
+  PNPM_VERSION = "11"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

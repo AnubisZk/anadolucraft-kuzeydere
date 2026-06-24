@@ -1,0 +1,38 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: batidere-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: batidere
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env. See .env.example.}
+      POSTGRES_DB: batidere
+    ports:
+      - "127.0.0.1:5433:5432"
+    volumes:
+      - batidere_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U batidere -d batidere"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # The full game server (client + API + world). `docker compose up -d`
+  # then open http://localhost:8787 — or put a TLS reverse proxy in front
+  # for remote hosting (see README).
+  game:
+    build: .
+    container_name: batidere-game
+    restart: unless-stopped
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgres://batidere:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env. See .env.example.}@postgres:5432/batidere
+      PORT: "8787"
+    # loopback-only: the TLS reverse proxy (Caddy) is the public entrance
+    ports:
+      - "127.0.0.1:8787:8787"
+
+volumes:
+  batidere_pgdata:
